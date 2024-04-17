@@ -1,8 +1,18 @@
-export function CategoryTable() {
+import { Category, categoriesData } from "./fetchCategories";
+
+export async function CategoryTable() {
+  const categories = await categoriesData();
+
+  if (categories.err !== null) {
+    return categories.err;
+  }
+
   return (
     <table className="w-full border-collapse border border-slate-400 bg-white text-sm shadow-sm">
       <TableHeader />
-      <TableRow />
+      {categories.ok.map((c) => {
+        return <TableRow key={c.id} categories={c} />;
+      })}
     </table>
   );
 }
@@ -16,11 +26,14 @@ function TableHeader() {
             <input type="checkbox" />
           </label>
         </th>
-        <th className="w-1/2 border border-slate-300 p-3 text-left font-semibold text-slate-900">
+        <th className="w-1/3 border border-slate-300 p-3 text-left font-semibold text-slate-900">
           Виробник
         </th>
-        <th className="w-1/2 border border-slate-300 p-3 text-left font-semibold text-slate-900">
-          Порядок сортування
+        <th className="w-1/3 border border-slate-300 p-3 text-left font-semibold text-slate-900">
+          Властивості
+        </th>
+        <th className="w-1/3 border border-slate-300 p-3 text-left font-semibold text-slate-900">
+          Опис
         </th>
         <th className="border border-slate-300 p-3 text-left font-semibold text-slate-900">
           Дія
@@ -30,7 +43,7 @@ function TableHeader() {
   );
 }
 
-function TableRow() {
+function TableRow(props: { categories: Category }) {
   return (
     <tbody className="bg-slate-200">
       <tr className="w-full">
@@ -39,13 +52,19 @@ function TableRow() {
             <input type="checkbox" />
           </label>
         </th>
-        <th className="w-1/2 border border-slate-300 p-3 text-left font-semibold text-slate-900">
-          Виробник
+        <th className="w-1/3 border border-slate-300 p-3 text-left font-semibold text-slate-900">
+          {props.categories.name}
         </th>
-        <th className="w-1/2 border border-slate-300 p-3 text-left font-semibold text-slate-900">
-          Порядок сортування
+        <th className="w-1/3 border border-slate-300 p-3 text-left font-semibold text-slate-900">
+          {props.categories.properties
+            .map((p) => {
+              return p.name;
+            })
+            .join(", ")}
         </th>
-
+        <th className="w-1/3 border border-slate-300 p-3 text-left font-semibold text-slate-900">
+          {props.categories.description ?? ""}
+        </th>
         <th className="border border-slate-300 p-3 text-left font-semibold text-slate-900">
           <PencilSquare />
         </th>
