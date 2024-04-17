@@ -26,11 +26,12 @@ function TableHeader() {
             <input type="checkbox" />
           </label>
         </th>
+        {/* todo: add an image column with size 40 / 40 px  */}
         <th className="w-1/3 border border-slate-300 p-3 text-left font-semibold text-slate-900">
-          Виробник
+          Назва
         </th>
         <th className="w-1/3 border border-slate-300 p-3 text-left font-semibold text-slate-900">
-          Властивості
+          Назва категорія
         </th>
         <th className="w-1/3 border border-slate-300 p-3 text-left font-semibold text-slate-900">
           Опис

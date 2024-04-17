@@ -15,7 +15,7 @@ export type Category = {
   id: number;
   name: string;
   description: null;
-  parentCategoryId: null;
+  parentCategoryId: null; // use - where null
   properties: Property[];
   subcategories: Subcategory[];
 };
