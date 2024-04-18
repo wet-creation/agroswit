@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Category, categoriesData } from "./fetchCategories";
 
 export async function CategoryTable() {
@@ -57,17 +58,15 @@ function TableRow(props: { categories: Category }) {
           {props.categories.name}
         </th>
         <th className="w-1/3 border border-slate-300 p-3 text-left font-semibold text-slate-900">
-          {props.categories.properties
-            .map((p) => {
-              return p.name;
-            })
-            .join(", ")}
+          {props.categories.parentCategoryId ?? "-"}
         </th>
         <th className="w-1/3 border border-slate-300 p-3 text-left font-semibold text-slate-900">
-          {props.categories.description ?? ""}
+          {props.categories.description ?? "-"}
         </th>
         <th className="border border-slate-300 p-3 text-left font-semibold text-slate-900">
-          <Eye />
+          <Link href={`/category/${props.categories.id}`}>
+            <Eye />
+          </Link>
         </th>
       </tr>
     </tbody>
