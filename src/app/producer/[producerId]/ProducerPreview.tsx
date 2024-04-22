@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { fetchProducer } from "./producer";
 
 export async function ProducerPreview(props: { producerId: string }) {
@@ -9,22 +8,29 @@ export async function ProducerPreview(props: { producerId: string }) {
   }
 
   return (
-    <div className="mx-auto flex h-full w-full max-w-xl grow flex-col gap-3 rounded border bg-[#8FBC8F]/50 p-2">
+    <form className="mx-auto flex h-full w-full max-w-xl grow flex-col gap-3 rounded border bg-[#8FBC8F]/50 p-2">
       <h1 className="text-center text-xl font-semibold">{producer.ok.name}</h1>
-      <h2>Producer logo: {producer.ok.logoUrl}</h2>
-      {/* <Image
-            src={producers.ok.logoUrl}
-            alt={`${producers.ok.name} logo`}
-            width={40}
-            height={40}
-          /> */}
+      <label>
+        Producer name:
+        <input type="text" name="name" defaultValue={producer.ok.name} />
+      </label>
+      <label>
+        {/* todo: display it as an image */}
+        Producer logo url:
+        <input
+          type="url"
+          required
+          defaultValue={producer.ok.logoUrl}
+          name="logo"
+        />
+      </label>
       <div className="grow"></div>
-      <Link
-        href={`/producer/${producer.ok.id}/edit`}
+      <button
+        type="submit"
         className="rounded border bg-[#8FBC8F]/70 p-3 text-center font-medium"
       >
-        Редагувати продюсера
-      </Link>
-    </div>
+        Зберігти зміни
+      </button>
+    </form>
   );
 }
