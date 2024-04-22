@@ -68,7 +68,7 @@ function TableRow(props: { producers: Producer }) {
           {props.producers.name}
         </th>
         <th className="border border-slate-300 p-3 text-left font-semibold text-slate-900">
-          <Link href={`/category/${props.producers.id}`}>
+          <Link href={`/producer/${props.producers.id}`}>
             <Eye />
           </Link>
         </th>
