@@ -73,7 +73,7 @@ function TableRow(props: { categories: Category }) {
   );
 }
 
-function Eye() {
+export function Eye() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
