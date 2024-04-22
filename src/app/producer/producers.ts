@@ -11,7 +11,7 @@ export async function getProducers(): Promise<Result<Producer[], string>> {
 
     return { ok: null, err: await res.text() };
   } catch (e) {
-    console.log(e);
+    console.error(e);
     return { ok: null, err: "network error" };
   }
 }

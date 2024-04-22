@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Producer, getProducers } from "./producers";
 import { Eye } from "../category/CategoryTable";
 
-export async function ProducerForm() {
+export async function ProducersForm() {
   const producers = await getProducers();
 
   if (producers.err !== null) {
