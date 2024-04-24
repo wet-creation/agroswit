@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { Producer, getProducers } from "./producers";
-import { Eye } from "../category/CategoryTable";
+import { getProducers } from "./producers";
+import { TableRow } from "./TableRow";
 
 export async function ProducersForm() {
   const producers = await getProducers();
@@ -11,9 +11,17 @@ export async function ProducersForm() {
 
   return (
     <form>
-      <button className="rounded bg-red-500 px-6 py-2 font-semibold text-white">
-        Видалити обраних виробників
-      </button>
+      <div className="flex justify-end gap-2">
+        <Link
+          href="/producer/create"
+          className="rounded border bg-white px-6 py-2 font-semibold text-[#8FBC8F]"
+        >
+          Створити виробника
+        </Link>
+        <button className="rounded bg-red-500 px-6 py-2 font-semibold text-white">
+          Видалити обраних виробників
+        </button>
+      </div>
       <table className="w-full border-collapse border border-slate-400 bg-white text-sm shadow-sm">
         <TableHeader />
         {producers.ok.map((c) => {
@@ -33,46 +41,16 @@ function TableHeader() {
             <input type="checkbox" />
           </label>
         </th>
-        <th className="border border-slate-300 p-3 text-left font-semibold text-slate-900">
+        <th className="w-1/5 border border-slate-300 p-3 text-left font-semibold text-slate-900">
           Лого
         </th>
-        <th className="border border-slate-300 p-3 text-left font-semibold text-slate-900">
+        <th className="w-full border border-slate-300 p-3 text-left font-semibold text-slate-900">
           Назва
         </th>
         <th className="border border-slate-300 p-3 text-left font-semibold text-slate-900">
-          Дія
+          Редагувати
         </th>
       </tr>
     </thead>
-  );
-}
-
-function TableRow(props: { producers: Producer }) {
-  return (
-    <tbody className="bg-slate-200">
-      <tr className="w-full">
-        <th className="w-9 border border-slate-300 p-3 text-left font-semibold text-slate-900">
-          <label>
-            <input type="checkbox" />
-          </label>
-        </th>
-        <th className="border border-slate-300 p-3 text-left font-semibold text-slate-900">
-          {/* <Image
-            src={props.producers.logoUrl}
-            alt={`${props.producers.name} logo`}
-            width={40}
-            height={40}
-          /> */}
-        </th>
-        <th className="border border-slate-300 p-3 text-left font-semibold text-slate-900">
-          {props.producers.name}
-        </th>
-        <th className="border border-slate-300 p-3 text-left font-semibold text-slate-900">
-          <Link href={`/producer/${props.producers.id}`}>
-            <Eye />
-          </Link>
-        </th>
-      </tr>
-    </tbody>
   );
 }

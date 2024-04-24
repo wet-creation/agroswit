@@ -2,7 +2,9 @@ import { env } from "@/env.mjs";
 
 export async function getProducers(): Promise<Result<Producer[], string>> {
   try {
-    const res = await fetch(`${env.SERVER_URL}/api/v1/producers`);
+    const res = await fetch(`${env.SERVER_URL}/api/v1/producers`, {
+      cache: "no-cache",
+    });
 
     if (res.status === 200) {
       const json = (await res.json()) as Producer[];
